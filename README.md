@@ -11,5 +11,5 @@ Stryker.NET offers you mutation testing for your .NET projects. It allows you to
 
 The project is still in its early days and is not ready to use on your applications.
 
-Want to help develop Stryker.NET? Checkout out our [contributing guide](/CONTRIBUTING.md)!
+Want to help develop Stryker.NET? Check out our [contributing guide](/CONTRIBUTING.md)!
 In the meantime, start by [mutation testing your JavaScript](https://stryker-mutator.github.io)
