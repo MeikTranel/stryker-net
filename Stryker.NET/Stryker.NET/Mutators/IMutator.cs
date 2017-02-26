@@ -2,7 +2,7 @@
 
 namespace Stryker.NET.Mutators
 {
-    interface IMutator
+    public interface IMutator
     {
         string Name { get; }
         SyntaxNode ApplyMutations(SyntaxNode node);

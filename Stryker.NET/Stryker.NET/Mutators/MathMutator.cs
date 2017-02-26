@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Stryker.NET.Mutators
 {
-    class MathMutator : IMutator
+    public class MathMutator : IMutator
     {
         public Dictionary<SyntaxKind, SyntaxKind> Tokens { get; private set; }
 
