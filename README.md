@@ -13,3 +13,27 @@ The project is still in its early days and is not ready to use on your applicati
 
 Want to help develop Stryker.NET? Check out our [contributing guide](/CONTRIBUTING.md)!
 In the meantime, start by [mutation testing your JavaScript](https://stryker-mutator.github.io)
+
+## Supported Mutators
+Right now, Stryker.NET supports the following mutators:
+
+### BinaryExpressionMutator
+| Original | Mutated  |
+| -------- | -------- |
+| a + b    | a - b    |
+| a - b    | a + b    |
+| a * b    | a / b    |
+| a / b    | a * b    |
+| a % b    | a * b    |
+| a < b    | a <= b   |
+| a < b    | a >= b   |
+| a > b    | a <= b   |
+| a > b    | a >= b   |
+| a <= b   | a < b    |
+| a <= b   | a > b    |
+| a >= b   | a < b    |
+| a >= b   | a < b    |
+| a == b   | a != b   |
+| a != b   | a == b   |
+| a \|\| b   | a && b   |
+| a && b   | a \|\| b   |

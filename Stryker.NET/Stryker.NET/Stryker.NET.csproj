@@ -95,7 +95,7 @@
     <Compile Include="Mutant.cs" />
     <Compile Include="MutatorOrchestrator.cs" />
     <Compile Include="Mutators\IMutator.cs" />
-    <Compile Include="Mutators\MathMutator.cs" />
+    <Compile Include="Mutators\BinaryExpressionMutator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stryker.cs" />

@@ -13,7 +13,7 @@ namespace Stryker.NET
 
         public MutatorOrchestrator()
         {
-            Mutators = new List<IMutator> { new MathMutator() };
+            Mutators = new List<IMutator> { new BinaryExpressionMutator() };
         }
 
         public IEnumerable<Mutant> mutate(IEnumerable<string> files)
@@ -32,11 +32,14 @@ namespace Stryker.NET
                 {
                     foreach (var mutator in Mutators)
                     {
-                        var mutatedNode = mutator.ApplyMutations(node);
-                        if (mutatedNode != null)
+                        var mutatedNodes = mutator.ApplyMutations(node);
+                        if (mutatedNodes != null)
                         {
-                            var mutatedCode = root.ReplaceNode(node, mutatedNode).ToFullString();
-                            mutants.Add(new Mutant(mutator.Name, file, mutatedCode, node.ToFullString(), mutatedNode.ToFullString(), node.Span));
+                            foreach (var mutatedNode in mutatedNodes)
+                            {
+                                var mutatedCode = root.ReplaceNode(node, mutatedNode).ToFullString();
+                                mutants.Add(new Mutant(mutator.Name, file, mutatedCode, node.ToFullString(), mutatedNode.ToFullString(), node.Span));
+                            }
                         }
                     }
                 }

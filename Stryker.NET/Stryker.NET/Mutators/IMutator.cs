@@ -1,10 +1,11 @@
 ﻿using Microsoft.CodeAnalysis;
+using System.Collections.Generic;
 
 namespace Stryker.NET.Mutators
 {
     public interface IMutator
     {
         string Name { get; }
-        SyntaxNode ApplyMutations(SyntaxNode node);
+        IEnumerable<SyntaxNode> ApplyMutations(SyntaxNode node);
     }
 }
