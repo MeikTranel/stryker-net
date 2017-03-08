@@ -1,4 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/caflq6c3yvuqrklb/branch/master?svg=true)](https://ci.appveyor.com/project/simondel/stryker-net/branch/master)
+[![Quality Gate](https://sonarqube.com/api/badges/gate?key=Stryker.NET)](https://sonarqube.com/dashboard/index/Stryker.NET)
 
 ![Stryker](stryker-80x80.png)
 

@@ -240,6 +240,12 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+.sonarqube
 
 # SonarQube
 .sonarqube/
+Stryker\.NET/nunit2TestResult\.xml
+
+Stryker\.NET/nunit3TestResult\.xml
+
+Stryker\.NET/opencoverTestCoverageReport\.xml

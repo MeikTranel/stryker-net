@@ -1,5 +1,36 @@
 version: 0.0.0.{build}
+skip_tags: true
+configuration: Release
+platform: Any CPU
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
 before_build:
-- cmd: nuget restore Stryker.NET/Stryker.NET.sln
+- cmd: >-
+    cd Stryker.NET
+    
+    nuget restore Stryker.NET.sln
+    
+    dir
+
+    InitializeSonarqubeAnalysis.bat
+    
 build:
-  verbosity: minimal
+  project: Stryker.NET/Stryker.NET.sln
+  parallel: true
+  verbosity: normal
+
+before_package:
+- cmd: >-
+    RunOpencoverCodeCoverageSession.bat
+
+    RunSonarqubeAnalysis.bat
+after_build:
+- ps: >-
+    $wc = New-Object 'System.Net.WebClient'
+
+    $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit3/$($env:APPVEYOR_JOB_ID)", (Resolve-Path nunit3TestResult.xml))
+test: off
