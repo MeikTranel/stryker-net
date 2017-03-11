@@ -8,7 +8,6 @@ namespace Stryker.NET
 {
     internal class MutatorOrchestrator
     {
-
         public List<IMutator> Mutators { get; private set; }
 
         public MutatorOrchestrator()
@@ -47,7 +46,6 @@ namespace Stryker.NET
 
             return mutants;
         }
-
 
         private void CollectNodes(SyntaxNode node, IList<SyntaxNode> nodes)
         {
