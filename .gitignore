@@ -244,8 +244,11 @@ ModelManifest.xml
 
 # SonarQube
 .sonarqube/
-Stryker\.NET/nunit2TestResult\.xml
 
-Stryker\.NET/nunit3TestResult\.xml
+# VS Code
+.vscode/
 
+# Test Results
+
+Stryker\.NET/XUnitTestResult\.xml
 Stryker\.NET/opencoverTestCoverageReport\.xml
