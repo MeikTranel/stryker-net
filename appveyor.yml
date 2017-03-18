@@ -1,36 +1,32 @@
 version: 0.0.0.{build}
+
 skip_tags: true
 configuration: Release
-platform: Any CPU
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
+
+os: Visual Studio 2017
+
 before_build:
 - cmd: >-
     cd Stryker.NET
-    
-    nuget restore Stryker.NET.sln
-    
-    dir
 
+    nuget install MSBuild.SonarQube.Runner.Tool -Version 1.0.0 -OutputDirectory packages
+
+    nuget install JetBrains.dotCover.CommandLineTools -Version 2016.3.20170126.124346 -OutputDirectory packages
+    
+    dotnet restore
+    
     InitializeSonarqubeAnalysis.bat
     
 build:
-  project: Stryker.NET/Stryker.NET.sln
-  parallel: true
-  verbosity: normal
+  verbosity: minimal
 
-before_package:
+after_build:
 - cmd: >-
-    RunOpencoverCodeCoverageSession.bat
+    RunDotCoverCodeCoverageSession.bat
 
     RunSonarqubeAnalysis.bat
-after_build:
 - ps: >-
     $wc = New-Object 'System.Net.WebClient'
 
-    $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit3/$($env:APPVEYOR_JOB_ID)", (Resolve-Path nunit3TestResult.xml))
+    $wc.UploadFile("https://ci.appveyor.com/api/testresults/mstest/$($env:APPVEYOR_JOB_ID)", (Resolve-Path TestResults.trx))
 test: off

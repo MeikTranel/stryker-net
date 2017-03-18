@@ -7,7 +7,7 @@ namespace Stryker.NET
     {
         static void Main(string[] args)
         {
-            var rootFolder = Path.Combine(Environment.CurrentDirectory, @"..\..\");
+            var rootFolder = Directory.GetCurrentDirectory();
             string[] files = { Path.Combine(rootFolder, "Math.cs") };
             var stryker = new Stryker(files);
             stryker.RunMutationTest();

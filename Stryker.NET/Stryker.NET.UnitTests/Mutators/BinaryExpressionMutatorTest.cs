@@ -1,57 +1,52 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using NUnit.Framework;
 using Stryker.NET.Mutators;
 using System.Linq;
+using Xunit;
 
 namespace Stryker.NET.UnitTests.Mutators
 {
-    [TestFixture]
     public class BinaryExpressionMutatorTest
     {
-        private BinaryExpressionMutator mutator;
 
-        [SetUp]
-        public void Setup()
+        [Theory]
+        [InlineData("var x = 1 + 2;", "1 - 2")]
+        [InlineData("var x = 1 - 2;", "1 + 2")]
+        [InlineData("var x = 1 * 2;", "1 / 2")]
+        [InlineData("var x = 1 / 2;", "1 * 2")]
+        [InlineData("var x = 1 % 2;", "1 * 2")]
+        [InlineData("var x = 1 == 2;", "1 != 2")]
+        [InlineData("var x = 1 != 2;", "1 == 2")]
+        [InlineData("var x = 1 || 2;", "1 && 2")]
+        [InlineData("var x = 1 && 2;", "1 || 2")]
+        public void ApplyMutations_ValidBinaryExpression_ReturnsSingleMutatedBinaryExpression(string originalCode, string expectedCode)
         {
-            mutator = new BinaryExpressionMutator();
-        }
-
-        [TestCase("var x = 1 + 2;", "1 - 2")]
-        [TestCase("var x = 1 - 2;", "1 + 2")]
-        [TestCase("var x = 1 * 2;", "1 / 2")]
-        [TestCase("var x = 1 / 2;", "1 * 2")]
-        [TestCase("var x = 1 % 2;", "1 * 2")]
-        [TestCase("var x = 1 == 2;", "1 != 2")]
-        [TestCase("var x = 1 != 2;", "1 == 2")]
-        [TestCase("var x = 1 || 2;", "1 && 2")]
-        [TestCase("var x = 1 && 2;", "1 || 2")]
-        public void ApplyMutations_ValidBinaryExpression_ReturnsSingleMutatedBinaryExpression(string originalCode, string expectedMutatedCode)
-        {
+            var mutator = new BinaryExpressionMutator();
             var node = GetBinaryExpression(originalCode);
 
             var mutatedNodes = mutator.ApplyMutations(node);
             var mutatedCode = mutatedNodes.Single().ToFullString();
-
-            Assert.AreEqual(expectedMutatedCode, mutatedCode);
+            Assert.Equal(expectedCode, mutatedCode);
         }
 
-        [TestCase("var x = 1 < 2;", new string[] { "1 <= 2", "1 >= 2" })]
-        [TestCase("var x = 1 > 2;", new string[] { "1 <= 2", "1 >= 2" })]
-        [TestCase("var x = 1 <= 2;", new string[] { "1 < 2", "1 > 2" })]
-        [TestCase("var x = 1 >= 2;", new string[] { "1 < 2", "1 > 2" })]
+        [Theory]
+        [InlineData("var x = 1 < 2;", new string[] { "1 <= 2", "1 >= 2" })]
+        [InlineData("var x = 1 > 2;", new string[] { "1 <= 2", "1 >= 2" })]
+        [InlineData("var x = 1 <= 2;", new string[] { "1 < 2", "1 > 2" })]
+        [InlineData("var x = 1 >= 2;", new string[] { "1 < 2", "1 > 2" })]
         public void ApplyMutations_ValidBinaryExpression_ReturnsMultipleMutatedBinaryExpressions(string originalCode, string[] expectedMutatedCode)
         {
+            var mutator = new BinaryExpressionMutator();
             var node = GetBinaryExpression(originalCode);
 
             var mutatedNodes = mutator.ApplyMutations(node).ToArray();
 
-            Assert.AreEqual(expectedMutatedCode.Length, mutatedNodes.Length);
+            Assert.Equal(expectedMutatedCode.Length, mutatedNodes.Length);
             for (int i = 0; i < expectedMutatedCode.Length; i++)
             {
                 var mutatedCode = mutatedNodes[i].ToFullString();
-                Assert.AreEqual(expectedMutatedCode[i], mutatedCode);
+                Assert.Equal(expectedMutatedCode[i], mutatedCode);
             }
         }
 
