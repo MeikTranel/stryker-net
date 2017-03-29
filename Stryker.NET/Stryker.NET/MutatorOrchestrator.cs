@@ -3,10 +3,11 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Stryker.NET.Mutators;
 using System.Collections.Generic;
+using System;
 
 namespace Stryker.NET
 {
-    internal class MutatorOrchestrator
+    public class MutatorOrchestrator
     {
 
         public List<IMutator> Mutators { get; private set; }
@@ -16,15 +17,13 @@ namespace Stryker.NET
             Mutators = new List<IMutator> { new BinaryExpressionMutator() };
         }
 
-        public IEnumerable<Mutant> mutate(IEnumerable<string> files)
+        public IEnumerable<Mutant> Mutate(IEnumerable<string> files)
         {
             var mutants = new List<Mutant>();
 
             foreach (var file in files)
             {
-                var originalCode = System.IO.File.ReadAllText(file);
-                SyntaxTree tree = CSharpSyntaxTree.ParseText(originalCode);
-                var root = (CompilationUnitSyntax)tree.GetRoot();
+                var root = GetSyntaxTreeRootFromFile(file);
                 var nodes = new List<SyntaxNode>();
                 CollectNodes(root, nodes);
 
@@ -33,14 +32,8 @@ namespace Stryker.NET
                     foreach (var mutator in Mutators)
                     {
                         var mutatedNodes = mutator.ApplyMutations(node);
-                        if (mutatedNodes != null)
-                        {
-                            foreach (var mutatedNode in mutatedNodes)
-                            {
-                                var mutatedCode = root.ReplaceNode(node, mutatedNode).ToFullString();
-                                mutants.Add(new Mutant(mutator.Name, file, mutatedCode, node.ToFullString(), mutatedNode.ToFullString(), node.Span));
-                            }
-                        }
+                        var newMutants = GenerateMutants(mutatedNodes, mutator.Name, root, node, file);
+                        mutants.AddRange(newMutants);
                     }
                 }
             }
@@ -48,6 +41,27 @@ namespace Stryker.NET
             return mutants;
         }
 
+        private IEnumerable<Mutant> GenerateMutants(IEnumerable<SyntaxNode> mutatedNodes, string mutatorName, CompilationUnitSyntax root, SyntaxNode node, string file)
+        {
+            var mutants = new List<Mutant>();
+            if (mutatedNodes != null)
+            {
+                foreach (var mutatedNode in mutatedNodes)
+                {
+                    var mutatedCode = root.ReplaceNode(node, mutatedNode).ToFullString();
+                    mutants.Add(new Mutant(mutatorName, file, mutatedCode, node.ToFullString(), mutatedNode.ToFullString(), node.Span));
+                }
+            }
+            return mutants;
+        }
+
+        private CompilationUnitSyntax GetSyntaxTreeRootFromFile(string file)
+        {
+            var originalCode = System.IO.File.ReadAllText(file);
+            SyntaxTree tree = CSharpSyntaxTree.ParseText(originalCode);
+            var root = (CompilationUnitSyntax)tree.GetRoot();
+            return root;
+        }
 
         private void CollectNodes(SyntaxNode node, IList<SyntaxNode> nodes)
         {

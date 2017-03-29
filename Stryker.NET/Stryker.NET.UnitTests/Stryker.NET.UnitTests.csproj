@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>    
-    <ProjectGuid>{F191DB6B-B5C4-4241-84CF-870BFF86D1B3}</ProjectGuid> <!-- fake project guid to satisfy SonarQube -->
+    <ProjectGuid>2950d3ea-a752-44dd-8620-b51c8758434e</ProjectGuid> <!-- fake project guid to satisfy SonarQube -->
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81</PackageTargetFallback>
     <Copyright>Copyright ©  2017</Copyright>
