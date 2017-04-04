@@ -20,6 +20,5 @@ namespace Stryker.NET
             MutatedFragment = mutatedFragment;
             Span = span;
         }
-
     }
 }
