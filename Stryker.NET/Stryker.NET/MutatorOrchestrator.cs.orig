@@ -9,7 +9,6 @@ namespace Stryker.NET
 {
     public class MutatorOrchestrator
     {
-
         public List<IMutator> Mutators { get; private set; }
 
         public MutatorOrchestrator()
@@ -41,6 +40,8 @@ namespace Stryker.NET
             return mutants;
         }
 
+<<<<<<< HEAD
+=======
         private IEnumerable<Mutant> GenerateMutants(IEnumerable<SyntaxNode> mutatedNodes, string mutatorName, CompilationUnitSyntax root, SyntaxNode node, string file)
         {
             var mutants = new List<Mutant>();
@@ -63,6 +64,7 @@ namespace Stryker.NET
             return root;
         }
 
+>>>>>>> master
         private void CollectNodes(SyntaxNode node, IList<SyntaxNode> nodes)
         {
             nodes.Add(node);

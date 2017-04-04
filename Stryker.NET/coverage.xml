@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<AnalyseParams>
-  <TargetExecutable>c:\Program Files\dotnet\dotnet.exe</TargetExecutable>
-  <TargetArguments>test C:\projects\stryker-net\Stryker.NET\Stryker.NET.UnitTests\Stryker.NET.UnitTests.csproj --logger "trx;LogFileName=C:\projects\stryker-net\Stryker.NET\TestResults.trx" -o C:\projects\stryker-net\Stryker.NET\Stryker.NET.UnitTests\bin\Release\netcoreapp1.1\ --no-build</TargetArguments>
-  <Output>DotCoverTestCoverageReport.html</Output>
-  <ReportType>HTML</ReportType>
-</AnalyseParams>

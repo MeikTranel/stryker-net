@@ -14,7 +14,7 @@ namespace Stryker.NET
         public void RunMutationTest()
         {
             var mutatorOrchestrator = new MutatorOrchestrator();
-            var mutants = mutatorOrchestrator.mutate(Files);
+            var mutants = mutatorOrchestrator.Mutate(Files);
 
             foreach (var mutant in mutants)
             {
