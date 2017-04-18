@@ -16,7 +16,8 @@ To develop features for Stryker.NET, we suggest using Visual Studio 2015, 2017 o
 6. When writing code please create or edit unit tests or integration tests.
 7. If you're done changing code, make a pull request on the Stryker.NET repo.
 
-We encourage using Codemaid, automatic code formattig tool (http://www.codemaid.net/)
+
+This project is .editorconfig enabled. Please use Visual Studio 2017 .editorconfig features (https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options) or tools like Codemaid (http://www.codemaid.net/) to keep codebase nicely formatted
 
 # Community 
 Do you want to help? Great! These are a few things you can do:
