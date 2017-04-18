@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Stryker.NET\Stryker.NET.csproj" />
+    <ProjectReference Include="..\..\Stryker.NET\Stryker.NET.csproj" />
   </ItemGroup>
 
   <ItemGroup>

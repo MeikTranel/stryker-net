@@ -1,11 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET", "Stryker.NET\Stryker.NET.csproj", "{89F08CD4-D3AF-4992-97B7-A4B2081D1CEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET.UnitTests", "Stryker.NET.UnitTests\Stryker.NET.UnitTests.csproj", "{2950D3EA-A752-44DD-8620-B51C8758434E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_tests", "_tests", "{2B11F380-8723-4902-A9DF-A75509EEEA79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stryker.NET.UnitTests", "_tests\Stryker.NET.UnitTests\Stryker.NET.UnitTests.csproj", "{2950D3EA-A752-44DD-8620-B51C8758434E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLITestRunner", "CLITestRunner\CLITestRunner.csproj", "{92602961-54FA-4123-89ED-37BD21EF9B14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLITestRunner.UnitTests", "_tests\CLITestRunner.UnitTests\CLITestRunner.UnitTests.csproj", "{D8362271-B9B5-419F-A55B-889550D65F8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestData", "TestData", "{8F112CA2-3772-4C95-986F-961209AE0E2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLogicForTests", "_tests\TestData\SampleLogicForTests\SampleLogicForTests.csproj", "{9A265F0F-714C-4CC1-BD13-27D5B298FE95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleLogicNunitTests", "_tests\TestData\SampleLogicNunitTests\SampleLogicNunitTests.csproj", "{A753F97A-641F-4052-944D-7A98493111E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLogicxUnitTests", "_tests\TestData\SampleLogicxUnitTests\SampleLogicxUnitTests.csproj", "{C5BDE283-9343-48D1-B606-C08B289745C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +35,36 @@ Global
 		{2950D3EA-A752-44DD-8620-B51C8758434E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2950D3EA-A752-44DD-8620-B51C8758434E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2950D3EA-A752-44DD-8620-B51C8758434E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92602961-54FA-4123-89ED-37BD21EF9B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92602961-54FA-4123-89ED-37BD21EF9B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92602961-54FA-4123-89ED-37BD21EF9B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92602961-54FA-4123-89ED-37BD21EF9B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8362271-B9B5-419F-A55B-889550D65F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8362271-B9B5-419F-A55B-889550D65F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8362271-B9B5-419F-A55B-889550D65F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8362271-B9B5-419F-A55B-889550D65F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A265F0F-714C-4CC1-BD13-27D5B298FE95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A265F0F-714C-4CC1-BD13-27D5B298FE95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A265F0F-714C-4CC1-BD13-27D5B298FE95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A265F0F-714C-4CC1-BD13-27D5B298FE95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A753F97A-641F-4052-944D-7A98493111E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A753F97A-641F-4052-944D-7A98493111E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A753F97A-641F-4052-944D-7A98493111E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A753F97A-641F-4052-944D-7A98493111E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5BDE283-9343-48D1-B606-C08B289745C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5BDE283-9343-48D1-B606-C08B289745C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5BDE283-9343-48D1-B606-C08B289745C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5BDE283-9343-48D1-B606-C08B289745C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2950D3EA-A752-44DD-8620-B51C8758434E} = {2B11F380-8723-4902-A9DF-A75509EEEA79}
+		{D8362271-B9B5-419F-A55B-889550D65F8E} = {2B11F380-8723-4902-A9DF-A75509EEEA79}
+		{8F112CA2-3772-4C95-986F-961209AE0E2D} = {2B11F380-8723-4902-A9DF-A75509EEEA79}
+		{9A265F0F-714C-4CC1-BD13-27D5B298FE95} = {8F112CA2-3772-4C95-986F-961209AE0E2D}
+		{A753F97A-641F-4052-944D-7A98493111E2} = {8F112CA2-3772-4C95-986F-961209AE0E2D}
+		{C5BDE283-9343-48D1-B606-C08B289745C8} = {8F112CA2-3772-4C95-986F-961209AE0E2D}
 	EndGlobalSection
 EndGlobal
