@@ -2,16 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>Stryker.NET.MutantTestsCLIRunner.UnitTests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.console" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\CLITestRunner\CLITestRunner.csproj" />
   </ItemGroup>
 
 </Project>

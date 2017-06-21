@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <AssemblyName>Stryker.NET.MutantTestsCLIRunner</AssemblyName>
+    <RootNamespace>Stryker.NET.MutantTestsCLIRunner</RootNamespace>
+  </PropertyGroup>
+
+</Project>

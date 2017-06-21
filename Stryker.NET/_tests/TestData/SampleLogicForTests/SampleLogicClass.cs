@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleLogicForTests
+﻿namespace SampleLogicForTests
 {
     public class SampleLogicClass
     {
