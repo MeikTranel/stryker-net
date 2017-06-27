@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET", "Stryker.NET\Stryker.NET.csproj", "{89F08CD4-D3AF-4992-97B7-A4B2081D1CEC}"
 EndProject
@@ -17,9 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLogicxUnitTests", "_t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLogicNunitTests", "_tests\TestData\SampleLogicNunitTests\SampleLogicNunitTests.csproj", "{BBC84276-73D1-4527-85B9-AC5D5059075F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stryker.NET.MutantTestsCLIRunner", "Stryker.NET.MutantTestsCLIRunner\Stryker.NET.MutantTestsCLIRunner.csproj", "{BBC910C6-98D5-4B85-B2BF-10F935A4E08F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stryker.NET.CLITestSuiteRunner", "Stryker.NET.CLITestSuiteRunner\Stryker.NET.CLITestSuiteRunner.csproj", "{6F54794B-FAA9-4EB1-99E0-9FAF19928373}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stryker.NET.MutantTestsCLIRunner.UnitTests", "_tests\Stryker.NET.MutantTestsCLIRunner\Stryker.NET.MutantTestsCLIRunner.UnitTests.csproj", "{C101618E-FE2D-44BC-95F7-6DD16A300CE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET.CLITestExecutionInterpreters", "Stryker.NET.CLITestExecutionInterpreters\Stryker.NET.CLITestExecutionInterpreters.csproj", "{3754CF67-523B-4A9F-9821-3DBB77792572}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET.CLITestExecutionInterpreters.UnitTests", "Stryker.NET.CLITestExecutionInterpreters.UnitTests\Stryker.NET.CLITestExecutionInterpreters.UnitTests.csproj", "{40CA37AD-A14C-4073-BD04-83162F2E5B2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,14 +49,18 @@ Global
 		{BBC84276-73D1-4527-85B9-AC5D5059075F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBC84276-73D1-4527-85B9-AC5D5059075F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBC84276-73D1-4527-85B9-AC5D5059075F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBC910C6-98D5-4B85-B2BF-10F935A4E08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBC910C6-98D5-4B85-B2BF-10F935A4E08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBC910C6-98D5-4B85-B2BF-10F935A4E08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBC910C6-98D5-4B85-B2BF-10F935A4E08F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C101618E-FE2D-44BC-95F7-6DD16A300CE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C101618E-FE2D-44BC-95F7-6DD16A300CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C101618E-FE2D-44BC-95F7-6DD16A300CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C101618E-FE2D-44BC-95F7-6DD16A300CE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F54794B-FAA9-4EB1-99E0-9FAF19928373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F54794B-FAA9-4EB1-99E0-9FAF19928373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F54794B-FAA9-4EB1-99E0-9FAF19928373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F54794B-FAA9-4EB1-99E0-9FAF19928373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3754CF67-523B-4A9F-9821-3DBB77792572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3754CF67-523B-4A9F-9821-3DBB77792572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3754CF67-523B-4A9F-9821-3DBB77792572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3754CF67-523B-4A9F-9821-3DBB77792572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40CA37AD-A14C-4073-BD04-83162F2E5B2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40CA37AD-A14C-4073-BD04-83162F2E5B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40CA37AD-A14C-4073-BD04-83162F2E5B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40CA37AD-A14C-4073-BD04-83162F2E5B2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,6 @@ Global
 		{9A265F0F-714C-4CC1-BD13-27D5B298FE95} = {8F112CA2-3772-4C95-986F-961209AE0E2D}
 		{C5BDE283-9343-48D1-B606-C08B289745C8} = {8F112CA2-3772-4C95-986F-961209AE0E2D}
 		{BBC84276-73D1-4527-85B9-AC5D5059075F} = {8F112CA2-3772-4C95-986F-961209AE0E2D}
-		{C101618E-FE2D-44BC-95F7-6DD16A300CE0} = {2B11F380-8723-4902-A9DF-A75509EEEA79}
+		{40CA37AD-A14C-4073-BD04-83162F2E5B2C} = {2B11F380-8723-4902-A9DF-A75509EEEA79}
 	EndGlobalSection
 EndGlobal
