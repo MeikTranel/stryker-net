@@ -12,9 +12,9 @@ namespace Stryker.NET.CLITestExecutionInterpreters
             _StreamToInterpret = StreamToInterpret;
         }
 
-        public event EventHandler UnitTestExecutionFinished;
+        public event EventHandler<TestCaseEventArgs> UnitTestExecutionFinished;
 
-        protected virtual void OnUnitTestExecutionFinished(EventArgs e)
+        protected virtual void OnUnitTestExecutionFinished(TestCaseEventArgs e)
         {
             UnitTestExecutionFinished?.Invoke(this, e);
         }
