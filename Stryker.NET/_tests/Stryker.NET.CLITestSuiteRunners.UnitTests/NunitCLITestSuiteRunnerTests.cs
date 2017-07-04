@@ -28,8 +28,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
 
         public class GetProcessExecutableNameFromCommand : NunitCLITestSuiteRunner
         {
-            [Theory]
-            [InlineData("var x = 1 + 2;", "1 - 2")]
+            [Fact]
             public void GetProcessExecutableNameFromCommand_NullCommand_EmptyStringOutput()
             {
                 string command = null;
