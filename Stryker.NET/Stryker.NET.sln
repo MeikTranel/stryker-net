@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET", "Stryker.NET\Stryker.NET.csproj", "{89F08CD4-D3AF-4992-97B7-A4B2081D1CEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stryker.NET", "Stryker.NET\Stryker.NET.csproj", "{89F08CD4-D3AF-4992-97B7-A4B2081D1CEC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_tests", "_tests", "{2B11F380-8723-4902-A9DF-A75509EEEA79}"
 EndProject
@@ -11,17 +11,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stryker.NET.UnitTests", "_t
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestData", "TestData", "{8F112CA2-3772-4C95-986F-961209AE0E2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLogicForTests", "_tests\TestData\SampleLogicForTests\SampleLogicForTests.csproj", "{9A265F0F-714C-4CC1-BD13-27D5B298FE95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleLogicForTests", "_tests\TestData\SampleLogicForTests\SampleLogicForTests.csproj", "{9A265F0F-714C-4CC1-BD13-27D5B298FE95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLogicxUnitTests", "_tests\TestData\SampleLogicxUnitTests\SampleLogicxUnitTests.csproj", "{C5BDE283-9343-48D1-B606-C08B289745C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleLogicxUnitTests", "_tests\TestData\SampleLogicxUnitTests\SampleLogicxUnitTests.csproj", "{C5BDE283-9343-48D1-B606-C08B289745C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLogicNunitTests", "_tests\TestData\SampleLogicNunitTests\SampleLogicNunitTests.csproj", "{BBC84276-73D1-4527-85B9-AC5D5059075F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleLogicNunitTests", "_tests\TestData\SampleLogicNunitTests\SampleLogicNunitTests.csproj", "{BBC84276-73D1-4527-85B9-AC5D5059075F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stryker.NET.CLITestSuiteRunner", "Stryker.NET.CLITestSuiteRunner\Stryker.NET.CLITestSuiteRunner.csproj", "{6F54794B-FAA9-4EB1-99E0-9FAF19928373}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stryker.NET.CLITestExecutionInterpreters", "Stryker.NET.CLITestExecutionInterpreters\Stryker.NET.CLITestExecutionInterpreters.csproj", "{3754CF67-523B-4A9F-9821-3DBB77792572}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET.CLITestExecutionInterpreters", "Stryker.NET.CLITestExecutionInterpreters\Stryker.NET.CLITestExecutionInterpreters.csproj", "{3754CF67-523B-4A9F-9821-3DBB77792572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stryker.NET.CLITestExecutionInterpreters.UnitTests", "Stryker.NET.CLITestExecutionInterpreters.UnitTests\Stryker.NET.CLITestExecutionInterpreters.UnitTests.csproj", "{40CA37AD-A14C-4073-BD04-83162F2E5B2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET.CLITestExecutionInterpreters.UnitTests", "Stryker.NET.CLITestExecutionInterpreters.UnitTests\Stryker.NET.CLITestExecutionInterpreters.UnitTests.csproj", "{40CA37AD-A14C-4073-BD04-83162F2E5B2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET.CLITestSuiteRunners", "Stryker.NET.CLITestSuiteRunners\Stryker.NET.CLITestSuiteRunners.csproj", "{C6AFE54C-A91E-4BF3-9579-FD10034375B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stryker.NET.CLITestSuiteRunners.UnitTests", "_tests\Stryker.NET.CLITestSuiteRunners.UnitTests\Stryker.NET.CLITestSuiteRunners.UnitTests.csproj", "{61836FF7-4310-4DE2-BFF2-45BEA77FD96A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +51,6 @@ Global
 		{BBC84276-73D1-4527-85B9-AC5D5059075F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBC84276-73D1-4527-85B9-AC5D5059075F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBC84276-73D1-4527-85B9-AC5D5059075F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F54794B-FAA9-4EB1-99E0-9FAF19928373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F54794B-FAA9-4EB1-99E0-9FAF19928373}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F54794B-FAA9-4EB1-99E0-9FAF19928373}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F54794B-FAA9-4EB1-99E0-9FAF19928373}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3754CF67-523B-4A9F-9821-3DBB77792572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3754CF67-523B-4A9F-9821-3DBB77792572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3754CF67-523B-4A9F-9821-3DBB77792572}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,6 +59,14 @@ Global
 		{40CA37AD-A14C-4073-BD04-83162F2E5B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40CA37AD-A14C-4073-BD04-83162F2E5B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40CA37AD-A14C-4073-BD04-83162F2E5B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6AFE54C-A91E-4BF3-9579-FD10034375B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6AFE54C-A91E-4BF3-9579-FD10034375B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6AFE54C-A91E-4BF3-9579-FD10034375B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6AFE54C-A91E-4BF3-9579-FD10034375B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61836FF7-4310-4DE2-BFF2-45BEA77FD96A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61836FF7-4310-4DE2-BFF2-45BEA77FD96A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61836FF7-4310-4DE2-BFF2-45BEA77FD96A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61836FF7-4310-4DE2-BFF2-45BEA77FD96A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,5 +78,6 @@ Global
 		{C5BDE283-9343-48D1-B606-C08B289745C8} = {8F112CA2-3772-4C95-986F-961209AE0E2D}
 		{BBC84276-73D1-4527-85B9-AC5D5059075F} = {8F112CA2-3772-4C95-986F-961209AE0E2D}
 		{40CA37AD-A14C-4073-BD04-83162F2E5B2C} = {2B11F380-8723-4902-A9DF-A75509EEEA79}
+		{61836FF7-4310-4DE2-BFF2-45BEA77FD96A} = {2B11F380-8723-4902-A9DF-A75509EEEA79}
 	EndGlobalSection
 EndGlobal
