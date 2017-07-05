@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
 namespace Stryker.NET.CLITestSuiteRunners
 {
@@ -40,7 +38,12 @@ namespace Stryker.NET.CLITestSuiteRunners
 
         protected virtual string GetProcessArgumentsFromCommand(string FullCLICommand)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(FullCLICommand))
+                return string.Empty;
+
+            var executableName = GetProcessExecutableNameFromCommand(FullCLICommand);
+
+            return FullCLICommand.Substring(executableName.Length).TrimStart(' ');
         }
     }
 }

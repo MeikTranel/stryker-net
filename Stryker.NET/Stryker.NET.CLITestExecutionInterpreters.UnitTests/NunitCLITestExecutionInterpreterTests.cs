@@ -15,7 +15,7 @@ namespace Stryker.NET.CLITestExecutionInterpreters.UnitTests
             var instance = new NunitCLITestExecutionInterpreter(new MemoryStream());
         }
 
-        [Fact]
+        [Fact(Skip = "Irrelevant")]
         public void InputStreamPrintsMessageAboutSuccessfullTestExecution_UnitTestExecutionFinishedEventRaised()
         {
             //https://stackoverflow.com/questions/2784878/continuously-reading-from-a-stream

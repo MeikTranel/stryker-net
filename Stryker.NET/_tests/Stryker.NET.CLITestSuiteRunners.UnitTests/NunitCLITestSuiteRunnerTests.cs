@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Stryker.NET.CLITestSuiteRunners.UnitTests
@@ -112,6 +110,97 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
                 var expected = @"""c:\Program Files\SomeProgramToRun.exe""";
 
                 var actual = GetProcessExecutableNameFromCommand(command);
+
+                Assert.Equal(expected, actual);
+            }
+        }
+
+        public class GetProcessArgumentsFromCommand : NunitCLITestSuiteRunner
+        {
+            [Fact]
+            public void GetProcessArgumentsFromCommand_NullCommand_EmptyStringOutput()
+            {
+                string command = null;
+                var expected = string.Empty;
+
+                var actual = GetProcessArgumentsFromCommand(command);
+
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void GetProcessArgumentsFromCommand_EmptyCommand_EmptyStringOutput()
+            {
+                string command = string.Empty;
+                var expected = string.Empty;
+
+                var actual = GetProcessArgumentsFromCommand(command);
+
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void GetProcessArgumentsFromCommand_OneWordCommand_SameWordReturned()
+            {
+                string command = "SomeProgramToRun.exe";
+                var expected = "";
+
+                var actual = GetProcessArgumentsFromCommand(command);
+
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void GetProcessArgumentsFromCommand_TwoWordCommandSeparatedWithOneSpace_FirstWordWithoutSpacesReturned()
+            {
+                string command = "SomeProgramToRun.exe --parametersNotProvided";
+                var expected = "--parametersNotProvided";
+
+                var actual = GetProcessArgumentsFromCommand(command);
+
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void GetProcessArgumentsFromCommand_TwoWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
+            {
+                string command = "SomeProgramToRun.exe           --parametersNotProvided";
+                var expected = "--parametersNotProvided";
+
+                var actual = GetProcessArgumentsFromCommand(command);
+
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void GetProcessArgumentsFromCommand_ManyWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
+            {
+                string command = "SomeProgramToRun.exe           --parametersNotProvided yet   there  are     some";
+                var expected = "--parametersNotProvided yet   there  are     some";
+
+                var actual = GetProcessArgumentsFromCommand(command);
+
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void GetProcessArgumentsFromCommand_ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpace_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
+            {
+                string command = "\"c:\\Program Files\\SomeProgramToRun.exe\"           --parametersNotProvided yet   there  are     some";
+                var expected = @"--parametersNotProvided yet   there  are     some";
+
+                var actual = GetProcessArgumentsFromCommand(command);
+
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void GetProcessArgumentsFromCommand_ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpaceAndQuotedParemeters_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
+            {
+                string command = "\"c:\\Program Files\\SomeProgramToRun.exe\"           --parametersNotProvided \"yet   there  are     some\"";
+                var expected = "--parametersNotProvided \"yet   there  are     some\"";
+
+                var actual = GetProcessArgumentsFromCommand(command);
 
                 Assert.Equal(expected, actual);
             }
