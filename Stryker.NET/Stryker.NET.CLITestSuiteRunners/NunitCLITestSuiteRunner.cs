@@ -7,6 +7,38 @@ namespace Stryker.NET.CLITestSuiteRunners
     {
         Process testRunningCLI;
 
+        public string TestSuiteRunnerExecutable { get; protected set; }
+        public string TestSuiteRunnerArguments { get; protected set; }
+
+        public NunitCLITestSuiteRunner(string FullCLICommand)
+        {
+            this.TestSuiteRunnerExecutable = GetProcessExecutableNameFromCommand(FullCLICommand);
+            this.TestSuiteRunnerArguments = GetProcessArgumentsFromCommand(FullCLICommand);
+        }
+
+        protected NunitCLITestSuiteRunner()
+        {
+        }
+
+        public void StartTestSuiteExecution()
+        {
+            throw new Exception();
+        }
+
+        public event EventHandler<TestCaseEventArgs> UnitTestExecutionStarted;
+
+        protected virtual void OnUnitTestExecutionStarted(TestCaseEventArgs e)
+        {
+            UnitTestExecutionStarted?.Invoke(this, e);
+        }
+
+        public event EventHandler<TestCaseEventArgs> UnitTestExecutionFinished;
+
+        protected virtual void OnUnitTestExecutionFinished(TestCaseEventArgs e)
+        {
+            UnitTestExecutionFinished?.Invoke(this, e);
+        }
+
         protected virtual void ValidateCliCommand(string FullCLICommand)
         {
             if (FullCLICommand == null)

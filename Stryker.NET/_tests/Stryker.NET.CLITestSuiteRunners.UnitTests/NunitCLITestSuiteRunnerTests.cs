@@ -5,10 +5,41 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
 {
     public class NunitCLITestSuiteRunnerTests
     {
+        public class Constructor
+        {
+            [Fact]
+            public void ProcessWithoutArguments_NoException()
+            {
+                new NunitCLITestSuiteRunner("some.exe");
+            }
+
+            [Fact]
+            public void ProcessWithArguments_NoExceptionAndProcessExeAndArgsSet()
+            {
+                var subject = new NunitCLITestSuiteRunner("some.exe some arguments");
+                Assert.Equal("some.exe", subject.TestSuiteRunnerExecutable);
+                Assert.Equal("some arguments", subject.TestSuiteRunnerArguments);
+            }
+        }
+
+        public class StartTestSuiteExecution
+        {
+            [Fact]
+            public void ProcessReturningNothing_NoEventsRaisedAndExceptionInTheEnd()
+            {
+                var subject = new NunitCLITestSuiteRunner("powershell.exe -command exit");
+
+                subject.UnitTestExecutionStarted += (object sender, TestCaseEventArgs e) => { throw new Exception("This should not be invoked"); };
+                subject.UnitTestExecutionFinished += (object sender, TestCaseEventArgs e) => { throw new Exception("This should not be invoked"); };
+
+                Assert.Throws<Exception>(() => { subject.StartTestSuiteExecution(); });
+            }
+        }
+
         public class ValidateCliCommand : NunitCLITestSuiteRunner
         {
             [Fact]
-            public void ValidateCliCommand_NullCommand_Exception()
+            public void NullCommand_Exception()
             {
                 string command = null;
 
@@ -16,7 +47,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void ValidateCliCommand_EmptyCommand_Exception()
+            public void EmptyCommand_Exception()
             {
                 string command = string.Empty;
 
@@ -27,7 +58,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
         public class GetProcessExecutableNameFromCommand : NunitCLITestSuiteRunner
         {
             [Fact]
-            public void GetProcessExecutableNameFromCommand_NullCommand_EmptyStringOutput()
+            public void NullCommand_EmptyStringOutput()
             {
                 string command = null;
                 var expected = string.Empty;
@@ -38,7 +69,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessExecutableNameFromCommand_EmptyCommand_EmptyStringOutput()
+            public void EmptyCommand_EmptyStringOutput()
             {
                 string command = string.Empty;
                 var expected = string.Empty;
@@ -49,7 +80,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessExecutableNameFromCommand_OneWordCommand_SameWordReturned()
+            public void OneWordCommand_SameWordReturned()
             {
                 string command = "SomeProgramToRun.exe";
                 var expected = "SomeProgramToRun.exe";
@@ -60,7 +91,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessExecutableNameFromCommand_TwoWordCommandSeparatedWithOneSpace_FirstWordWithoutSpacesReturned()
+            public void TwoWordCommandSeparatedWithOneSpace_FirstWordWithoutSpacesReturned()
             {
                 string command = "SomeProgramToRun.exe --parametersNotProvided";
                 var expected = "SomeProgramToRun.exe";
@@ -71,7 +102,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessExecutableNameFromCommand_TwoWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
+            public void TwoWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
             {
                 string command = "SomeProgramToRun.exe           --parametersNotProvided";
                 var expected = "SomeProgramToRun.exe";
@@ -82,7 +113,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessExecutableNameFromCommand_ManyWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
+            public void ManyWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
             {
                 string command = "SomeProgramToRun.exe           --parametersNotProvided yet   there  are     some";
                 var expected = "SomeProgramToRun.exe";
@@ -93,7 +124,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessExecutableNameFromCommand_ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpace_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
+            public void ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpace_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
             {
                 string command = "\"c:\\Program Files\\SomeProgramToRun.exe\"           --parametersNotProvided yet   there  are     some";
                 var expected = @"""c:\Program Files\SomeProgramToRun.exe""";
@@ -104,7 +135,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessExecutableNameFromCommand_ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpaceAndQuotedParemeters_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
+            public void ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpaceAndQuotedParemeters_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
             {
                 string command = "\"c:\\Program Files\\SomeProgramToRun.exe\"           --parametersNotProvided \"yet   there  are     some\"";
                 var expected = @"""c:\Program Files\SomeProgramToRun.exe""";
@@ -118,7 +149,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
         public class GetProcessArgumentsFromCommand : NunitCLITestSuiteRunner
         {
             [Fact]
-            public void GetProcessArgumentsFromCommand_NullCommand_EmptyStringOutput()
+            public void NullCommand_EmptyStringOutput()
             {
                 string command = null;
                 var expected = string.Empty;
@@ -129,7 +160,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessArgumentsFromCommand_EmptyCommand_EmptyStringOutput()
+            public void EmptyCommand_EmptyStringOutput()
             {
                 string command = string.Empty;
                 var expected = string.Empty;
@@ -140,7 +171,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessArgumentsFromCommand_OneWordCommand_SameWordReturned()
+            public void OneWordCommand_SameWordReturned()
             {
                 string command = "SomeProgramToRun.exe";
                 var expected = "";
@@ -151,7 +182,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessArgumentsFromCommand_TwoWordCommandSeparatedWithOneSpace_FirstWordWithoutSpacesReturned()
+            public void TwoWordCommandSeparatedWithOneSpace_FirstWordWithoutSpacesReturned()
             {
                 string command = "SomeProgramToRun.exe --parametersNotProvided";
                 var expected = "--parametersNotProvided";
@@ -162,7 +193,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessArgumentsFromCommand_TwoWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
+            public void TwoWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
             {
                 string command = "SomeProgramToRun.exe           --parametersNotProvided";
                 var expected = "--parametersNotProvided";
@@ -173,7 +204,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessArgumentsFromCommand_ManyWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
+            public void ManyWordCommandSeparatedWithManySpaces_FirstWordWithoutSpacesReturned()
             {
                 string command = "SomeProgramToRun.exe           --parametersNotProvided yet   there  are     some";
                 var expected = "--parametersNotProvided yet   there  are     some";
@@ -184,7 +215,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessArgumentsFromCommand_ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpace_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
+            public void ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpace_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
             {
                 string command = "\"c:\\Program Files\\SomeProgramToRun.exe\"           --parametersNotProvided yet   there  are     some";
                 var expected = @"--parametersNotProvided yet   there  are     some";
@@ -195,7 +226,7 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
             }
 
             [Fact]
-            public void GetProcessArgumentsFromCommand_ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpaceAndQuotedParemeters_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
+            public void ManyWordCommandSeparatedWithManySpacesWithQuotedFullExecutablePathContainingSpaceAndQuotedParemeters_FirstWordInQuotesWithoutSpacesOnTheEndReturned()
             {
                 string command = "\"c:\\Program Files\\SomeProgramToRun.exe\"           --parametersNotProvided \"yet   there  are     some\"";
                 var expected = "--parametersNotProvided \"yet   there  are     some\"";
