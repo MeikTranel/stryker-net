@@ -34,6 +34,31 @@ namespace Stryker.NET.CLITestSuiteRunners.UnitTests
 
                 Assert.Throws<Exception>(() => { subject.StartTestSuiteExecution(); });
             }
+
+            [Fact]
+            public void ProcessReturningSomeOutputIrrelevantToUnitTest_NoEventsRaisedAndExceptionInTheEnd()
+            {
+                var subject = new NunitCLITestSuiteRunner("powershell.exe -command Write-Output some text irrelevant to unit tests ; exit");
+
+                subject.UnitTestExecutionStarted += (object sender, TestCaseEventArgs e) => { throw new Exception("This should not be invoked"); };
+                subject.UnitTestExecutionFinished += (object sender, TestCaseEventArgs e) => { throw new Exception("This should not be invoked"); };
+
+                Assert.Throws<Exception>(() => { subject.StartTestSuiteExecution(); });
+            }
+
+            [Fact]
+            public void ProcessReturningNunitTestStartedMessage_UnitTestExecutionStartedEventRaised()
+            {
+                var unitTestStartedMessage = "##teamcity[testStarted name='PassingCars.Tests.SolutionWithTestsTests2.solution_MaximumInputSizeAllZeros_0' captureStandardOutput='false' flowId='1']";
+                var subject = new NunitCLITestSuiteRunner($"powershell.exe -command Write-Output {unitTestStartedMessage} ; exit");
+
+                bool UnitTestExecutionStartedEventRaised = false;
+
+                subject.UnitTestExecutionStarted += (object sender, TestCaseEventArgs e) => { UnitTestExecutionStartedEventRaised = true; };
+                subject.UnitTestExecutionFinished += (object sender, TestCaseEventArgs e) => { throw new Exception("This should not be invoked"); };
+
+                Assert.True(UnitTestExecutionStartedEventRaised, "UnitTestExecutionStarted should be invoked but it wasnt");
+            }
         }
 
         public class ValidateCliCommand : NunitCLITestSuiteRunner
