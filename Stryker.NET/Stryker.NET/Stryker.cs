@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Stryker.NET.Managers;
 using System.Text;
+using Stryker.NET.Reporters;
 
 namespace Stryker.NET
 {
@@ -10,25 +11,30 @@ namespace Stryker.NET
     {
         private readonly string _tempDirName = ".stryker_temp";
 
-        private readonly IDirectoryManager _directoryManager;
         private string _rootdir;
+
         private readonly ITestRunner _testRunner;
+        private readonly IDirectoryManager _directoryManager;
+        private readonly IReporter _reporter;
+
         public IEnumerable<string> Files { get; private set; }
 
         public Stryker(ITestRunner testRunner, 
             IDirectoryManager directoryManager, 
+            IReporter reporter,
             IEnumerable<string> files,
             string rootdir)
         {
             Files = files;
             _testRunner = testRunner;
             _directoryManager = directoryManager;
+            _reporter = reporter;
             _rootdir = rootdir;
         }
 
         public void PrepareEnvironment()
         {
-            _directoryManager.CreateDirectory($"{_rootdir}\\{_tempDirName}");
+            _directoryManager?.CreateDirectory($"{_rootdir}\\{_tempDirName}");
         }
 
         public void RunMutationTest()
@@ -53,6 +59,8 @@ namespace Stryker.NET
                 // run unit tests with mutant
                 _testRunner.Test();
 
+                _reporter?.Report(mutant);
+
                 // restore mutant to original state
                 string restoredCode = mutatorOrchestrator.Restore(mutant);
                 File.WriteAllText(path, restoredCode);
@@ -61,7 +69,8 @@ namespace Stryker.NET
 
         public void Dispose()
         {
-            _directoryManager.Dispose();
+            _directoryManager?.Dispose();
+            _reporter?.Dispose();
         }
     }
 }

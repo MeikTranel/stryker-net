@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Stryker.NET.Mutators;
 using System.Collections.Generic;
-using System;
 
 namespace Stryker.NET
 {
@@ -56,7 +55,9 @@ namespace Stryker.NET
                 foreach (var mutatedNode in mutatedNodes)
                 {
                     var mutatedCode = root.ReplaceNode(node, mutatedNode).ToFullString();
-                    mutants.Add(new Mutant(mutatorName, file, mutatedCode, node.ToFullString(), mutatedNode.ToFullString(), node.Span));
+                    var loc = node.GetLocation();
+                    var lspan = loc.GetLineSpan();
+                    mutants.Add(new Mutant(mutatorName, file, mutatedCode, node.ToFullString(), mutatedNode.ToFullString(), node.Span, lspan.StartLinePosition));
                 }
             }
             return mutants;
