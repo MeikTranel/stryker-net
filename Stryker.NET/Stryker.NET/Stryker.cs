@@ -6,7 +6,7 @@ namespace Stryker.NET
 {
     class Stryker
     {
-        private readonly string tempDirName = ".stryker_temp";
+        private readonly string _tempDir;
 
         private readonly IDirectoryManager _directoryManager;
         private string _rootdir;
@@ -22,11 +22,12 @@ namespace Stryker.NET
             _testRunner = testRunner;
             _directoryManager = directoryManger;
             _rootdir = rootdir;
+            _tempDir = $"{rootdir}\\.stryker_temp";
         }
 
         public void PrepareEnvironment()
         {
-            _directoryManager.CreateDirectory($"{_rootdir}\\{tempDirName}");
+            _directoryManager.CopyRoot(_rootdir, _tempDir);
         }
 
         public void RunMutationTest()

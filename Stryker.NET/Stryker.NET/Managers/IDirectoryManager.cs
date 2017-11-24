@@ -2,6 +2,6 @@
 {
     public interface IDirectoryManager
     {
-        void CreateDirectory(string directory);
+        void CopyRoot(string source, string destination);
     }
 }

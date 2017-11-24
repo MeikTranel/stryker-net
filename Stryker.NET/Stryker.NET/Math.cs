@@ -1,4 +1,4 @@
-﻿namespace Stryker.NET
+namespace Stryker.NET
 {
     class Math
     {

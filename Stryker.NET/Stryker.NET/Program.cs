@@ -14,6 +14,7 @@ namespace Stryker.NET
             var runner = new TestRunner(rootFolder);
             var directoryManager = new DirectoryManager();
             var stryker = new Stryker(runner, directoryManager, files, rootFolder);
+            stryker.PrepareEnvironment();
             stryker.RunMutationTest();
             
             Console.ReadKey();
