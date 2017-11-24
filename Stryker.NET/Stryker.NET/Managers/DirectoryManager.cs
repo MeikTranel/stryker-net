@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Stryker.NET.Managers
 {
-    public class DirectoryManager :IDirectoryManager
+    public class DirectoryManager : IDirectoryManager
     {
         public void CreateDirectory(string directory)
         {
@@ -13,6 +13,11 @@ namespace Stryker.NET.Managers
             {
                 Directory.CreateDirectory(directory);
             }
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }
