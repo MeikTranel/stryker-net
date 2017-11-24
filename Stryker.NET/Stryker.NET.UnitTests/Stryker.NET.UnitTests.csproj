@@ -2,7 +2,7 @@
 
   <PropertyGroup>    
     <ProjectGuid>2950d3ea-a752-44dd-8620-b51c8758434e</ProjectGuid> <!-- fake project guid to satisfy SonarQube -->
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81</PackageTargetFallback>
     <Copyright>Copyright ©  2017</Copyright>
     <Description>UnitTests</Description>

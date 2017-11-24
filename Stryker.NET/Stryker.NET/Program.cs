@@ -7,11 +7,13 @@ namespace Stryker.NET
     {
         static void Main(string[] args)
         {
-            var rootFolder = Directory.GetCurrentDirectory();
-            string[] files = { Path.Combine(rootFolder, "Math.cs") };
+            var options = new StykerOptions();
+
+            var reflector = new FileReflector(options, Directory.GetCurrentDirectory());
+            string[] files = reflector.GetFilesToMutate();
             var stryker = new Stryker(files);
             stryker.RunMutationTest();
-
+            
             Console.ReadKey();
         }
     }
