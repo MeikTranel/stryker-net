@@ -62,7 +62,6 @@ namespace Stryker.NET
 
         public void Dispose()
         {
-
             _directoryManager.Dispose();
         }
     }
