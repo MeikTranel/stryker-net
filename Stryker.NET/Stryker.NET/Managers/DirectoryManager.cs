@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Stryker.NET.Managers
 {
-    public class DirectoryManager :IDirectoryManager
+    public class DirectoryManager : IDirectoryManager
     {
         public void CopyRoot(string source, string destination )
         {
@@ -19,6 +19,11 @@ namespace Stryker.NET.Managers
             foreach (string newPath in Directory.GetFiles(source, "*.*",
                 SearchOption.AllDirectories))
                 File.Copy(newPath, newPath.Replace(source, destination), true);
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

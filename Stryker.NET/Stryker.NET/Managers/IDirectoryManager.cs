@@ -1,6 +1,8 @@
-﻿namespace Stryker.NET.Managers
+﻿using System;
+
+namespace Stryker.NET.Managers
 {
-    public interface IDirectoryManager
+    public interface IDirectoryManager : IDisposable
     {
         void CopyRoot(string source, string destination);
     }
