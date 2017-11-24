@@ -252,3 +252,7 @@ ModelManifest.xml
 
 Stryker\.NET/XUnitTestResult\.xml
 Stryker\.NET/opencoverTestCoverageReport\.xml
+
+# Stryker temp folder
+
+[sS]tryker_temp/

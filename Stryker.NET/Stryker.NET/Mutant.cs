@@ -10,8 +10,9 @@ namespace Stryker.NET
         public string FilePath { get; private set; }
         public string MutatedCode { get; private set; }
         public TextSpan Span { get; private set; }
+        public LinePosition LinePosition { get; }
 
-        public Mutant(string mutatorName, string filePath, string mutatedCode, string originalFragment, string mutatedFragment, TextSpan span)
+        public Mutant(string mutatorName, string filePath, string mutatedCode, string originalFragment, string mutatedFragment, TextSpan span, LinePosition linePosition)
         {
             MutatorName = mutatorName;
             FilePath = filePath;
@@ -19,6 +20,7 @@ namespace Stryker.NET
             OriginalFragment = originalFragment;
             MutatedFragment = mutatedFragment;
             Span = span;
+            LinePosition = linePosition;
         }
     }
 }

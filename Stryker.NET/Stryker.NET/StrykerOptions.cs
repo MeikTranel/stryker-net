@@ -1,15 +1,15 @@
 ﻿namespace Stryker.NET
 {
-    public class StykerOptions : IStykerOptions
+    public class StrykerOptions : IStykerOptions
     {
         public string FileFilter { get; set; }
 
-        public StykerOptions(string filter)
+        public StrykerOptions(string filter)
         {
             FileFilter = filter;
         }
 
-        public StykerOptions() : this("*.cs")
+        public StrykerOptions() : this("*.cs")
         {
 
         }

@@ -8,7 +8,6 @@
             return num1 + num2;
         }
 
-        /* This does ++num1 */
         int Increment(int num1)
         {
             return ++num1;
