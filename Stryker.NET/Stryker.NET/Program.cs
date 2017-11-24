@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Stryker.NET.IsolatedRunner;
+using Stryker.NET.Managers;
 
 namespace Stryker.NET
 {
@@ -10,8 +11,9 @@ namespace Stryker.NET
         {
             var rootFolder = Directory.GetCurrentDirectory();
             string[] files = { Path.Combine(rootFolder, "Math.cs") };
-            var stryker = new Stryker(null, null, files, rootFolder);
-            var testRunner = new TestRunner(@"C:\Repos\stryker-net\Stryker.NET");
+            var runner = new TestRunner(rootFolder);
+            var directoryManager = new DirectoryManager();
+            var stryker = new Stryker(runner, directoryManager, files, rootFolder);
             stryker.RunMutationTest();
             
             Console.ReadKey();
