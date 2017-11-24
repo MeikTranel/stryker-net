@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Stryker.NET.Managers;
@@ -62,7 +62,6 @@ namespace Stryker.NET
 
         public void Dispose()
         {
-
             _directoryManager.Dispose();
         }
     }
