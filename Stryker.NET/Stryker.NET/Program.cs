@@ -9,13 +9,14 @@ namespace Stryker.NET
     class Program
     {
         static void Main(string[] args)
-        {
-            var rootFolder = Directory.GetCurrentDirectory();
-            string[] files = { Path.Combine(rootFolder, "Math.cs") };
+        {            
+            //TODO: get from args or a appconfig
+            var rootFolder = @"C:\Repos\stryker-net-new\stryker-net\Stryker.NET"; 
             var runner = new TestRunner(rootFolder);
             var directoryManager = new DirectoryManager();
             var reporter = new CleartTextReporter(rootFolder);
-            var stryker = new Stryker(runner, directoryManager, reporter, files, rootFolder);
+            var stryker = new Stryker(runner, directoryManager, reporter, rootFolder);
+            stryker.PrepareEnvironment();
             stryker.RunMutationTest();
             
             Console.ReadKey();

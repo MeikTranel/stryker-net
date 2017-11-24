@@ -7,8 +7,7 @@
   <PropertyGroup>
     <ProjectGuid>89f08cd4-d3af-4992-97b7-a4b2081d1cec</ProjectGuid> <!-- fake project guid to satisfy SonarQube -->
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81</PackageTargetFallback>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>Stryker.NET</AssemblyName>
     <RootNamespace>Stryker.NET</RootNamespace>
     <ApplicationIcon />

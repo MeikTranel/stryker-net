@@ -11,30 +11,27 @@ namespace Stryker.NET
     {
         private readonly string _tempDirName = ".stryker_temp";
 
-        private string _rootdir;
-
-        private readonly ITestRunner _testRunner;
         private readonly IDirectoryManager _directoryManager;
-        private readonly IReporter _reporter;
-
-        public IEnumerable<string> Files { get; private set; }
+        private string _rootdir;
+        private readonly ITestRunner _testRunner;
+        public IEnumerable<string> _files { get; private set; }
 
         public Stryker(ITestRunner testRunner, 
             IDirectoryManager directoryManager, 
             IReporter reporter,
-            IEnumerable<string> files,
             string rootdir)
         {
-            Files = files;
             _testRunner = testRunner;
             _directoryManager = directoryManager;
             _reporter = reporter;
             _rootdir = rootdir;
+            _tempDir = $"{rootdir}\\stryker_temp";
+            _mutationDir = $"{_tempDir}\\Stryker.NET";
         }
 
         public void PrepareEnvironment()
         {
-            _directoryManager?.CreateDirectory($"{_rootdir}\\{_tempDirName}");
+            _directoryManager.CopyRoot(_rootdir, _tempDir);
         }
 
         public void RunMutationTest()
@@ -43,9 +40,10 @@ namespace Stryker.NET
             {
                 throw new Exception("A test runner was not specified");
             }
+            _files = _directoryManager.GetFiles(_mutationDir);
 
             var mutatorOrchestrator = new MutatorOrchestrator();
-            var mutants = mutatorOrchestrator.Mutate(Files);
+            var mutants = mutatorOrchestrator.Mutate(_files);
 
             foreach (var mutant in mutants)
             {

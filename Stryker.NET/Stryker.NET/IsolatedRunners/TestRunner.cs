@@ -12,7 +12,7 @@ namespace Stryker.NET.IsolatedRunner
         public TestRunner(string rootDir)
         {
             _rootDirectory = rootDir;
-            _tempDirectory = $"{_rootDirectory}\\Temp";
+            _tempDirectory = $"{_rootDirectory}\\stryker_temp";
             _command = "dotnet";
             
         }
