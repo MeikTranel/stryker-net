@@ -43,7 +43,9 @@ namespace Stryker.NET
 
         public string Restore(Mutant mutant)
         {
-            throw new NotImplementedException();
+            var code = mutant.MutatedCode;
+
+            return code.Replace(mutant.MutatedFragment, mutant.OriginalFragment);
         }
 
         private IEnumerable<Mutant> GenerateMutants(IEnumerable<SyntaxNode> mutatedNodes, string mutatorName, CompilationUnitSyntax root, SyntaxNode node, string file)
