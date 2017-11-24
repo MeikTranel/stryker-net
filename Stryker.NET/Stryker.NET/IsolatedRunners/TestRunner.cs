@@ -31,11 +31,8 @@ namespace Stryker.NET.IsolatedRunner
                 UseShellExecute = false,
                 WorkingDirectory = _tempDirectory
             };
-            var process = Process.Start(info);            
-            while (!process.HasExited)
-            {
-                process = Process.GetProcessById(process.Id);
-            }
+            var process = Process.Start(info);
+            process.WaitForExit();
         }
     }
 }
