@@ -2,6 +2,7 @@
 using System.IO;
 using Stryker.NET.IsolatedRunner;
 using Stryker.NET.Managers;
+using Stryker.NET.Reporters;
 
 namespace Stryker.NET
 {
@@ -14,7 +15,8 @@ namespace Stryker.NET
             var rootFolder = @"C:\Dev\Repos\Stryker\Stryker.NET";
             var runner = new TestRunner(rootFolder);
             var directoryManager = new DirectoryManager();
-            using (var stryker = new Stryker(runner, directoryManager, rootFolder))
+            var reporter = new CleartTextReporter(rootFolder);
+            using (var stryker = new Stryker(runner, directoryManager, reporter, rootFolder))
             {
                 stryker.PrepareEnvironment();
                 stryker.RunMutationTest();
