@@ -6,6 +6,8 @@ namespace Stryker.NET
 {
     class Stryker
     {
+        private readonly string tempDirName = ".stryker_temp";
+
         private readonly IDirectoryManager _directoryManager;
         private string _rootdir;
         private readonly ITestRunner _testRunner;
@@ -24,7 +26,7 @@ namespace Stryker.NET
 
         public void PrepareEnvironment()
         {
-            _directoryManager.CreateDirectory($"{_rootdir}\\Temp");
+            _directoryManager.CreateDirectory($"{_rootdir}\\{tempDirName}");
         }
 
         public void RunMutationTest()
@@ -36,17 +38,17 @@ namespace Stryker.NET
             {
                 System.Console.WriteLine($"Mutated '{mutant.OriginalFragment}' to '{mutant.MutatedFragment}' using mutator {mutant.MutatorName}");
 
-                //For future refrence: http://www.tugberkugurlu.com/archive/compiling-c-sharp-code-into-memory-and-executing-it-with-roslyn
-                var codeToWrite = mutant.MutatedCode;
+                var path = mutant.FilePath;
+
+                // (over)write temp code file
+                File.WriteAllText(path, mutant.MutatedCode);
+
+                // run unit tests with mutant
                 
-                /* (over)write temp code file
-                using (var streamWriter = new FileStream(mutant.FilePath, FileMode.Create))
-                {
-                    // write text
-                }*/
 
                 // restore mutant to original state
-                //string restoredCode = mutatorOrchestrator.Restore(mutant);
+                string restoredCode = mutatorOrchestrator.Restore(mutant);
+                File.WriteAllText(path, restoredCode);
             }
         }
     }
