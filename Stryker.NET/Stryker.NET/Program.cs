@@ -11,7 +11,7 @@ namespace Stryker.NET
             string[] files = { Path.Combine(rootFolder, "Math.cs") };
             var stryker = new Stryker(files);
             stryker.RunMutationTest();
-
+            
             Console.ReadKey();
         }
     }
