@@ -29,10 +29,28 @@ namespace Stryker.NET.IsolatedRunner
             var info = new ProcessStartInfo(_command, arguments)
             {
                 UseShellExecute = false,
-                WorkingDirectory = _tempDirectory
+                WorkingDirectory = _tempDirectory,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
             };
             var process = Process.Start(info);
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_ErrorDataReceived;
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
             process.WaitForExit();
+        }
+
+        private void Process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            //ignore
+            //System.Console.WriteLine(e.Data);
+        }
+
+        private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            //ignore
+            //System.Console.WriteLine(e.Data);
         }
     }
 }

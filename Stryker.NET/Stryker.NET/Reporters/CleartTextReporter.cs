@@ -38,7 +38,7 @@ namespace Stryker.NET.Reporters
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -50,8 +50,6 @@ namespace Stryker.NET
 
             foreach (var mutant in mutants)
             {
-                Console.WriteLine($"Mutated '{mutant.OriginalFragment}' to '{mutant.MutatedFragment}' using mutator {mutant.MutatorName}");
-
                 var path = mutant.FilePath;
 
                 // (over)write temp code file
