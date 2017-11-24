@@ -11,8 +11,7 @@ namespace Stryker.NET
         static void Main(string[] args)
         {
             //TODO: get from args or a appconfig
-            //var rootFolder = @"C:\Repos\stryker-net-new\stryker-net\Stryker.NET"; 
-            var rootFolder = @"C:\Dev\Repos\Stryker\Stryker.NET";
+            var rootFolder = @".."; 
             var runner = new TestRunner(rootFolder);
             var directoryManager = new DirectoryManager();
             var reporter = new CleartTextReporter(rootFolder);
