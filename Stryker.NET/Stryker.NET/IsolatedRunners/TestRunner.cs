@@ -14,7 +14,7 @@ namespace Stryker.NET.IsolatedRunner
             _rootDirectory = rootDir;
             _tempDirectory = $"{_rootDirectory}\\Temp";
             _command = "dotnet";
-            DirectoryManager.CreateDirectory(_tempDirectory);
+            
         }
 
         public void Test()

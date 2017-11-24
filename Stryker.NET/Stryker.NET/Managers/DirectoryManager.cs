@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Stryker.NET.Managers
 {
-    public class DirectoryManager
+    public class DirectoryManager :IDirectoryManager
     {
-        public static void CreateDirectory(string directory)
+        public void CreateDirectory(string directory)
         {
             if (!Directory.Exists(directory))
             {
