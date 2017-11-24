@@ -9,12 +9,8 @@ namespace Stryker.NET.Managers
 {
     public class DirectoryManager : IDirectoryManager
     {
-        private string _tempDirectory;
-
         public void CopyRoot(string source, string destination)
         {
-            _tempDirectory = destination;
-
             //Now Create all of the directories
             foreach (string dirPath in Directory.GetDirectories(source, "*",
                 SearchOption.AllDirectories))
@@ -32,17 +28,22 @@ namespace Stryker.NET.Managers
 
         public IEnumerable<string> GetFiles(string source)
         {
-            var options = new StykerOptions();
+            var options = new StrykerOptions();
             var reflector = new FileReflector(options, source);
             return reflector.GetFilesToMutate();
         }
 
+        public void RemoveDirectory(string directoryPath)
+        {
+            if (Directory.Exists(directoryPath))
+            {
+                Directory.Delete(directoryPath, true);
+            }
+        }
+
         public void Dispose()
         {
-            if (Directory.Exists(_tempDirectory))
-            {
-                Directory.Delete(_tempDirectory, true);
-            }
+            
         }
     }
 }

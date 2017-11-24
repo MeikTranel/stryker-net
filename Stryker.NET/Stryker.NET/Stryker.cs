@@ -68,7 +68,7 @@ namespace Stryker.NET
 
         public void Dispose()
         {
-            _directoryManager?.Dispose();
+            _directoryManager.RemoveDirectory(_tempDir);
             _reporter?.Dispose();
         }
     }

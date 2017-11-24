@@ -7,5 +7,6 @@ namespace Stryker.NET.Managers
     {
         void CopyRoot(string source, string destination);
         IEnumerable<string> GetFiles(string source);
+        void RemoveDirectory(string directory);
     }
 }
