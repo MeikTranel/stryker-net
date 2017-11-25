@@ -7,20 +7,18 @@ namespace Stryker.NET.IsolatedRunner
     public class TestRunner : ITestRunner
     {
         private readonly string _rootDirectory;
-        private string _tempDirectory;
+        private readonly string _testDir;
         private readonly string _command;
 
-        public TestRunner(string rootDir)
+        public TestRunner(string testDir)
         {
-            _rootDirectory = rootDir;
-            _tempDirectory = $"{_rootDirectory}\\stryker_temp";
+            _testDir = testDir;
             _command = "dotnet";
         }
 
-        public void Test(string workingDirectory)
+        public void Test()
         {
             var arguments = $"test";
-            _tempDirectory = workingDirectory;
             RunCommand(arguments);
         }
 
@@ -29,7 +27,7 @@ namespace Stryker.NET.IsolatedRunner
             var info = new ProcessStartInfo(_command, arguments)
             {
                 UseShellExecute = false,
-                WorkingDirectory = _tempDirectory,
+                WorkingDirectory = _testDir,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             };

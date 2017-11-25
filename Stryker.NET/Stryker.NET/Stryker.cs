@@ -17,6 +17,7 @@ namespace Stryker.NET
         private readonly string _rootdir;
         private readonly string _tempDir;
         private readonly string _mutationDir;
+        private TestEnvironment[] _environments = new TestEnvironment[4];
         public IEnumerable<string> _files { get; private set; }
 
         public Stryker(IDirectoryManager directoryManager, 
@@ -26,10 +27,10 @@ namespace Stryker.NET
             _directoryManager = directoryManager;
             _reporter = reporter;
             _rootdir = rootdir;
-            _tempDir = $"{rootdir}\\{_tempDirNameBase}";
+            _tempDir = _tempDirNameBase;
             _mutationDir = $"{_rootdir}\\Stryker.NET";
         }
-        
+
         public void RunMutationTests()
         {
             if (_reporter == null)
@@ -42,15 +43,29 @@ namespace Stryker.NET
             var mutatorOrchestrator = new MutatorOrchestrator();
             var mutants = mutatorOrchestrator.Mutate(_files);
 
+            // create test environments
+            for (int i = 0; i < 4; i++)
+            {
+                _environments[i] = new TestEnvironment(_directoryManager, _reporter, _rootdir, _tempDir, "environment" + i);
+                _environments[i].PrepareEnvironment();
+            }
+
+            // assign mutants to test environments
+            int count = 0;
             foreach (var mutant in mutants)
+            {
+                var entvironmentNumber = count % 4;
+                _environments[entvironmentNumber].Mutants.Enqueue(mutant);
+                count++;
+            }
+
+            // start testing task in each environment
+            foreach (var environment in _environments)
             {
                 Task.Factory.StartNew(() =>
                 {
-                    using (var testEnvironment = new TestEnvironment(mutant, _directoryManager, _reporter, _rootdir, _tempDir))
-                    {
-                        testEnvironment.PrepareEnvironment();
-                        testEnvironment.RunTest();
-                    }
+                    environment.RunTests();
+                    environment.Dispose();
                     //var path = mutant.FilePath;
                     // restore mutant to original state
                     //string restoredCode = mutatorOrchestrator.Restore(mutant);
@@ -63,6 +78,7 @@ namespace Stryker.NET
         {
             _directoryManager.RemoveDirectory(_tempDir);
             _reporter?.Dispose();
+            _directoryManager?.RemoveDirectory(_tempDirNameBase);
         }
     }
 }

@@ -13,14 +13,21 @@ namespace Stryker.NET.Managers
         {
             //Now Create all of the directories
             foreach (string dirPath in Directory.GetDirectories(source, "*",
-                SearchOption.AllDirectories))
+                SearchOption.AllDirectories).Where(dir => !dir.Contains(".vs") && !dir.Contains("stryker_temp")))
             {
                 Directory.CreateDirectory(dirPath.Replace(source, destination));
+
+                CopyFiles(dirPath, source, destination);
             }
 
+            CopyFiles(destination, source, destination);
+        }
+
+        private void CopyFiles(string dirPath, string source, string destination)
+        {
             //Copy all the files & Replaces any files with the same name
-            foreach (string newPath in Directory.GetFiles(source, "*.*",
-                SearchOption.AllDirectories).Where(a => !a.StartsWith("Db") && !a.EndsWith(".lock")))
+            foreach (string newPath in Directory.GetFiles(dirPath, "*.*",
+                SearchOption.TopDirectoryOnly).Where(a => !a.StartsWith("Db") && !a.EndsWith(".lock")))
             {
                 File.Copy(newPath, newPath.Replace(source, destination), true);
             }
