@@ -19,11 +19,7 @@ namespace Stryker.NET.IsolatedRunner
         {
             var arguments = $"test";
             var exitcode = RunCommand(arguments);
-            if (exitcode == 1)
-            {
-                return true;
-            }
-            return false;
+            return true; //TODO return boolean based on exitcode
         }
 
         private int RunCommand(string arguments)
