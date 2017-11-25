@@ -19,8 +19,9 @@ namespace Stryker.NET
             {
                 stryker.PrepareEnvironment();
                 stryker.RunMutationTest();
-            }              
-            
+            }
+
+            Console.WriteLine("Done");
             Console.ReadKey();
         }
     }

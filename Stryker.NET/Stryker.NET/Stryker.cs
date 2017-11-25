@@ -9,6 +9,7 @@ namespace Stryker.NET
 {
     class Stryker : IDisposable
     {
+        private readonly string _tempDirName = "stryker_temp";
 
         private readonly IDirectoryManager _directoryManager;
         private readonly IReporter _reporter;
@@ -27,7 +28,7 @@ namespace Stryker.NET
             _directoryManager = directoryManager;
             _reporter = reporter;
             _rootdir = rootdir;
-            _tempDir = ConfigurationManager;
+            _tempDir = $"{rootdir}\\{_tempDirName}";
             _mutationDir = $"{_tempDir}\\Stryker.NET";
         }
 
