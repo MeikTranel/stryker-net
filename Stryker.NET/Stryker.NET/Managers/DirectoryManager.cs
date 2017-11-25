@@ -20,7 +20,7 @@ namespace Stryker.NET.Managers
                 CopyFiles(dirPath, source, destination);
             }
 
-            CopyFiles(destination, source, destination);
+            CopyFiles(source, source, destination);
         }
 
         private void CopyFiles(string dirPath, string source, string destination)
