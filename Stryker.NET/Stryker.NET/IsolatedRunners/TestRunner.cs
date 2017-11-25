@@ -6,7 +6,6 @@ namespace Stryker.NET.IsolatedRunner
 {
     public class TestRunner : ITestRunner
     {
-        private readonly string _rootDirectory;
         private readonly string _testDir;
         private readonly string _command;
 
@@ -16,13 +15,18 @@ namespace Stryker.NET.IsolatedRunner
             _command = "dotnet";
         }
 
-        public void Test()
+        public bool Test()
         {
             var arguments = $"test";
-            RunCommand(arguments);
+            var exitcode = RunCommand(arguments);
+            if (exitcode == 1)
+            {
+                return true;
+            }
+            return false;
         }
 
-        private void RunCommand(string arguments)
+        private int RunCommand(string arguments)
         {
             var info = new ProcessStartInfo(_command, arguments)
             {
@@ -35,6 +39,7 @@ namespace Stryker.NET.IsolatedRunner
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
             process.WaitForExit();
+            return process.ExitCode;
         }
     }
 }

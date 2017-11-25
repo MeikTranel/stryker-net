@@ -2,6 +2,6 @@
 {
     public interface ITestRunner
     {
-        void Test();
+        bool Test();
     }
 }

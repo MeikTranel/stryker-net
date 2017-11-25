@@ -11,7 +11,6 @@ namespace Stryker.NET
         static void Main(string[] args)
         {
             var rootFolder = ".."; //Directory.GetCurrentDirectory();
-            var runner = new TestRunner(rootFolder);
             var reporter = new CleartTextReporter();
             var directoryManager = new DirectoryManager(reporter);
             using (var stryker = new Stryker(directoryManager, reporter, rootFolder))

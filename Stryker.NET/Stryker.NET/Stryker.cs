@@ -15,7 +15,6 @@ namespace Stryker.NET
     class Stryker : IDisposable, IMutantTestedHandler
     {
         private readonly string _tempDirNameBase = "stryker_temp";
-
         private readonly IDirectoryManager _directoryManager;
         private readonly IReporter _reporter;
         private readonly string _rootdir;
@@ -53,6 +52,28 @@ namespace Stryker.NET
             if (_reporter == null)
             {
                 throw new Exception("A reporter was not specified");
+            }
+
+            Console.WriteLine("Creating sandbox for testing");
+            var env = new InitialTestEnvironment(_directoryManager, _rootdir, _tempDir, "testrunner");
+            env.PrepareEnvironment();
+            var task = Task<bool>.Factory.StartNew(() =>
+            {
+                var succes = env.RunTests();
+                env.Dispose();
+                return succes;
+            });
+            Console.WriteLine("Running initial test");
+            Task.WaitAll(task);
+
+            if (!task.Result)
+            {
+                Console.WriteLine("Initial test FAILED!");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Initial test PASSED!");
             }
 
             Console.WriteLine("Preparing files for mutation...");
