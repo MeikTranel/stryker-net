@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>    
+    <ProjectGuid>2950d3ea-a752-44dd-8620-b51c8758434e</ProjectGuid> <!-- fake project guid to satisfy SonarQube -->
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Copyright>Copyright ©  2017</Copyright>
+    <Description>UnitTests</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Stryker.NET\Stryker.NET.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,1 @@
+dotnet C:\Users\YaelK\AppData\Local\Microsoft\WindowsApps\Stryker.NET.dll

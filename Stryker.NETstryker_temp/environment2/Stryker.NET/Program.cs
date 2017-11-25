@@ -10,7 +10,8 @@ namespace Stryker.NET
     {
         static void Main(string[] args)
         {
-            var rootFolder = Directory.GetCurrentDirectory(); //replace with ".." to allow debugging of Stryker.NET itself
+            var rootFolder = Directory.GetCurrentDirectory();
+            var runner = new TestRunner(rootFolder);
             var reporter = new CleartTextReporter();
             var directoryManager = new DirectoryManager(reporter);
             using (var stryker = new Stryker(directoryManager, reporter, rootFolder))
