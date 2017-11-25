@@ -2,6 +2,6 @@
 {
     public interface ITestRunner
     {
-        void Test();
+        void Test(string workingDirectory);
     }
 }

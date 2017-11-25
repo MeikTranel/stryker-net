@@ -41,10 +41,5 @@ namespace Stryker.NET.Managers
                 Directory.Delete(directoryPath, true);
             }
         }
-
-        public void Dispose()
-        {
-            
-        }
     }
 }
