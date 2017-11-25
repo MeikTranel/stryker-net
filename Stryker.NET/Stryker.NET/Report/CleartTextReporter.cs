@@ -5,9 +5,10 @@ using System.Text;
 namespace Stryker.NET.Reporters
 {
     public class CleartTextReporter : IReporter
-    {        
+    {
+
         /// <summary>
-        /// Report the status and changes of the passed mutant to the console.
+        /// Eventhandler for 'MutantTested' event that report the status and changes of the passed mutantResult to the console.
         /// 
         /// Example report:
         /// 
@@ -17,18 +18,18 @@ namespace Stryker.NET.Reporters
         /// -                 return user.age >= 18;
         /// +                 return user.age > 18;
         /// </summary>
-        /// <param name="mutant">The mutant to report</param>
-        public void Report(Mutant mutant)
+        /// <param name="v">The mutantreport to display/write</param>
+        public void OnMutantTested(MutantResult mutantResult)
         {
             // Create a new stringbuilder instance for efficient report creation
             var sb = new StringBuilder();
 
             // Write report data to the stringbuilder
-            sb.AppendLine($"Mutant status unknown");
-            sb.AppendLine($"{mutant.FilePath}: line {mutant.LinePosition.Line + 1}:{mutant.LinePosition.Character + 1}"); //LinePosition starts at 0, not 1
-            sb.AppendLine($"Mutator: {mutant.MutatorName}");
-            sb.AppendLine($"-\t\t{mutant.OriginalFragment}");
-            sb.AppendLine($"+\t\t{mutant.MutatedFragment}");
+            sb.AppendLine($"Mutant {mutantResult.Status}!");
+            sb.AppendLine($"{mutantResult}: line {mutantResult.Location.Start.Line}:{mutantResult.Location.Start.Column}");
+            sb.AppendLine($"Mutator: {mutantResult.MutatorName}");
+            sb.AppendLine($"-\t\t{mutantResult.OriginalLines}");
+            sb.AppendLine($"+\t\t{mutantResult.MutatedLines}");
 
             // write to output (console)
             Console.WriteLine(sb.ToString());
@@ -36,7 +37,7 @@ namespace Stryker.NET.Reporters
 
         public void Dispose()
         {
-            
+            throw new NotImplementedException();
         }
     }
 }
