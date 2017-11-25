@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Stryker.NET.Core.Event;
 
 namespace Stryker.NET.Reporters
 {
-    interface IReporter : IDisposable
+    interface IReporter : IFileReadHandler, IMutantTestedHandler, IScoreHandler, IWrapUpHandler, ITestMatchHandler, IDisposable
     {
-        void OnSourceFileRead();
-        void OnAllSourceFilesRead();
-        void OnAllMutantsMatchedWithTests();
-        void OnMutantTested(MutantResult result);
-        void OnAllMutantsTested(IReadOnlyCollection<MutantResult> results);
-        void OnScoreCalculated();
-        void OnWrapUp();
     }
 }

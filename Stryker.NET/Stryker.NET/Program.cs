@@ -13,8 +13,8 @@ namespace Stryker.NET
             //TODO: get from args or a appconfig
             var rootFolder = @".."; 
             var runner = new TestRunner(rootFolder);
-            var directoryManager = new DirectoryManager();
             var reporter = new CleartTextReporter();
+            var directoryManager = new DirectoryManager(reporter);
             using (var stryker = new Stryker(runner, directoryManager, reporter, rootFolder))
             {
                 stryker.PrepareEnvironment();

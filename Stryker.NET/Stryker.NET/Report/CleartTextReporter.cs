@@ -35,9 +35,39 @@ namespace Stryker.NET.Reporters
             Console.WriteLine(sb.ToString());
         }
 
+        public void OnAllMutantsMatchedWithTests()
+        {
+            
+        }
+
+        public void OnAllMutantsTested(IReadOnlyCollection<MutantResult> results)
+        {
+            
+        }
+
+        public void OnScoreCalculated()
+        {
+            
+        }
+
+        public void OnWrapUp()
+        {
+            
+        }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public void OnSourceFileRead(string filePath)
+        {
+            
+        }
+
+        public void OnAllSourceFilesRead(string[] filePaths)
+        {
+            
         }
     }
 }

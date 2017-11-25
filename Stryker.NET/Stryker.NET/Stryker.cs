@@ -5,16 +5,12 @@ using Stryker.NET.Managers;
 using System.Text;
 using Stryker.NET.Reporters;
 using Stryker.NET.Core;
+using Stryker.NET.Core.Event;
 
 namespace Stryker.NET
 {
     class Stryker : IDisposable
     {
-        public delegate void MutantTestedDelegate(MutantResult result);
-        public delegate void AllMutantsTestedDelegate(IReadOnlyCollection<MutantResult> result);
-        public delegate void ScoreCalculatedDelegate();
-        public delegate void WrapUpDelegate();
-
         private readonly string _tempDirName = "stryker_temp";
 
         private readonly IDirectoryManager _directoryManager;
