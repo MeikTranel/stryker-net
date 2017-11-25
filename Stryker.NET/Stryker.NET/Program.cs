@@ -10,15 +10,22 @@ namespace Stryker.NET
     {
         static void Main(string[] args)
         {
-            var rootFolder = Directory.GetCurrentDirectory();
+            var rootFolder = "..";//Directory.GetCurrentDirectory();
             var runner = new TestRunner(rootFolder);
             var directoryManager = new DirectoryManager();
             var reporter = new CleartTextReporter();
             using (var stryker = new Stryker(directoryManager, reporter, rootFolder))
             {
-                stryker.RunMutationTests();
-            }              
-            
+                try {
+                    stryker.RunMutationTests();
+
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+            Console.WriteLine("done");
             Console.ReadKey();
         }
     }

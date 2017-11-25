@@ -12,6 +12,9 @@ Stryker.NET offers you mutation testing for your .NET projects. It allows you to
 
 The project is still in its early days and is not ready to use on your applications.
 
+To run Striker-net you need to clone this repo, publish the project "Striker.NET" to %USERPROFILE%\AppData\Local\Microsoft\WindowsApps. 
+From now on you can run  the command 'dotnet mutate' on the directory from where you want to run striker. This directory needs to contain you source code and your unit tests.
+
 Want to help develop Stryker.NET? Check out our [contributing guide](/CONTRIBUTING.md)!
 In the meantime, start by [mutation testing your JavaScript](https://stryker-mutator.github.io)
 

@@ -14,8 +14,9 @@ namespace Stryker.NET.Managers
             //Now Create all of the directories
             foreach (string dirPath in Directory.GetDirectories(source, "*",
                 SearchOption.AllDirectories).Where(dir => !dir.Contains(".vs") && !dir.Contains("stryker_temp")))
-            {
+            {                
                 Directory.CreateDirectory(dirPath.Replace(source, destination));
+                File.SetAttributes(destination, FileAttributes.Normal);
 
                 CopyFiles(dirPath, source, destination);
             }
@@ -28,8 +29,9 @@ namespace Stryker.NET.Managers
             //Copy all the files & Replaces any files with the same name
             foreach (string newPath in Directory.GetFiles(dirPath, "*.*",
                 SearchOption.TopDirectoryOnly).Where(a => !a.StartsWith("Db") && !a.EndsWith(".lock")))
-            {
+            {                
                 File.Copy(newPath, newPath.Replace(source, destination), true);
+                File.SetAttributes(destination, FileAttributes.Normal);
             }
         }
 
