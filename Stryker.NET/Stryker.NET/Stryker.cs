@@ -60,18 +60,17 @@ namespace Stryker.NET
             }
 
             // start testing task in each environment
+            var testRuns = new List<Task>();
             foreach (var environment in _environments)
             {
-                Task.Factory.StartNew(() =>
+                testRuns.Add(Task.Factory.StartNew(() =>
                 {
                     environment.RunTests();
                     environment.Dispose();
-                    //var path = mutant.FilePath;
-                    // restore mutant to original state
-                    //string restoredCode = mutatorOrchestrator.Restore(mutant);
-                    //File.WriteAllText(path, restoredCode);
-                });
+                }));
             }
+            Task.WaitAll(testRuns.ToArray());
+            Console.WriteLine("testRuns done");
         }
 
         public void Dispose()
