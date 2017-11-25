@@ -4,11 +4,19 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Stryker.NET.Core.Event;
 
 namespace Stryker.NET.Managers
 {
     public class DirectoryManager : IDirectoryManager
     {
+        private IFileReadHandler fileReadDelegate;
+
+        public DirectoryManager(IFileReadHandler fileReadDelegate)
+        {
+            this.fileReadDelegate = fileReadDelegate;
+        }
+
         public void CopyRoot(string source, string destination)
         {
             //Now Create all of the directories
@@ -38,7 +46,7 @@ namespace Stryker.NET.Managers
         public IEnumerable<string> GetFiles(string source)
         {
             var options = new StrykerOptions();
-            var reflector = new FileReflector(options, source);
+            var reflector = new FileReflector(options, source, fileReadDelegate);
             return reflector.GetFilesToMutate();
         }
 
