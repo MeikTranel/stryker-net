@@ -6,6 +6,8 @@ using System.Text;
 using Stryker.NET.Reporters;
 using Stryker.NET.Core;
 using Stryker.NET.Core.Event;
+using System.Linq;
+using Stryker.NET.Report;
 
 namespace Stryker.NET
 {
@@ -21,10 +23,10 @@ namespace Stryker.NET
         private readonly string _mutationDir;
         public IEnumerable<string> _files { get; private set; }
         
-        private event MutantTestedDelegate MutantTested;
-        private event AllMutantsTestedDelegate AllMutantsTested;
-        private event ScoreCalculatedDelegate ScoreCalculated;
-        private event WrapUpDelegate WrapUp;
+        private event MutantTestedDelegate MutantTested = delegate { };
+        private event AllMutantsTestedDelegate AllMutantsTested = delegate { };
+        private event ScoreCalculatedDelegate ScoreCalculated = delegate { };
+        private event WrapUpDelegate WrapUp = delegate { };
 
         public Stryker(ITestRunner testRunner, 
             IDirectoryManager directoryManager,
@@ -41,11 +43,13 @@ namespace Stryker.NET
             
             MutantTested += new MutantTestedDelegate(_reporter.OnMutantTested);
             AllMutantsTested += new AllMutantsTestedDelegate(_reporter.OnAllMutantsTested);
+            ScoreCalculated += new ScoreCalculatedDelegate(_reporter.OnScoreCalculated);
             WrapUp += new WrapUpDelegate(_reporter.OnWrapUp);
         }
 
         public void PrepareEnvironment()
         {
+            Console.WriteLine("Preparing files for mutation...");
             _directoryManager.CopyRoot(_rootdir, _tempDir);
         }
 
@@ -60,11 +64,22 @@ namespace Stryker.NET
                 throw new Exception("A reporter was not specified");
             }
 
+            // get files
+            Console.WriteLine($"Getting files to mutate from {_mutationDir}...");
             _files = _directoryManager.GetFiles(_mutationDir);
+            Console.WriteLine($"Found { _files.Count() } files.");
 
+            // selection process 
+            var filesToMutate = _files;
+
+            // mutate
+            Console.WriteLine($"Mutating {filesToMutate.Count()} files...");
             var mutatorOrchestrator = new MutatorOrchestrator();
             var mutants = mutatorOrchestrator.Mutate(_files);
+            Console.WriteLine($"Created { mutants.Count() } mutants.");
+            Console.WriteLine();
 
+            Console.WriteLine("Start testing mutants!");
             var results = new List<MutantResult>();
             foreach (var mutant in mutants)
             {
@@ -83,8 +98,8 @@ namespace Stryker.NET
                     mutant.MutatorName,
                     status,
                     mutant.MutatedCode,
-                    mutant.LinePosition.Line.ToString(), 
-                    mutant.LinePosition.Line.ToString(), //TODO: get correct mutated line position
+                    mutant.OriginalFragment, 
+                    mutant.MutatedFragment,
                     null,
                     new Location(
                         new Position(mutant.LinePosition.Line, mutant.LinePosition.Character),
@@ -102,13 +117,22 @@ namespace Stryker.NET
                 File.WriteAllText(path, restoredCode);
             }
 
-            // notify 'score calculated' observers
-            ScoreCalculated();
+            var timedOut = results.Where(r => r.Status == MutantStatus.TimedOut).Count();
+            var killed = results.Where(r => r.Status == MutantStatus.Killed).Count();
+            var survived = results.Where(r => r.Status == MutantStatus.Survived).Count();
+            var noCoverage = results.Where(r => r.Status == MutantStatus.NoCoverage).Count();
+
+            var scoreResult = new ScoreResult(killed, timedOut, survived, noCoverage);
 
             // notify 'all mutants tested' observers
+            Console.WriteLine("Done testing all mutants!");
             AllMutantsTested(results);
 
+            // notify 'score calculated' observers
+            ScoreCalculated(scoreResult);
+
             // notify 'wrap up' observers
+            Console.WriteLine("Wrapping up...");
             WrapUp();
         }
 

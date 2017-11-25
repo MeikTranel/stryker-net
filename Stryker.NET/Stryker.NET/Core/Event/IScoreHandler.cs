@@ -1,9 +1,11 @@
-﻿namespace Stryker.NET.Core.Event
+﻿using Stryker.NET.Report;
+
+namespace Stryker.NET.Core.Event
 {
-    public delegate void ScoreCalculatedDelegate();
+    public delegate void ScoreCalculatedDelegate(ScoreResult result);
 
     public interface IScoreHandler
     {
-        void OnScoreCalculated();
+        void OnScoreCalculated(ScoreResult result);
     }
 }

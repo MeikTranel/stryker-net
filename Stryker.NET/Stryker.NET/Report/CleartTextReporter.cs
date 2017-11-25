@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Stryker.NET.Report;
 
 namespace Stryker.NET.Reporters
 {
@@ -45,9 +46,27 @@ namespace Stryker.NET.Reporters
             
         }
 
-        public void OnScoreCalculated()
+        public void OnScoreCalculated(ScoreResult sr)
         {
-            
+            // Create a new stringbuilder instance for efficient report creation
+            var sb = new StringBuilder();
+
+            // Write report data to the stringbuilder
+            var line = "-----------|---------|----------|-----------|------------|----------|---------|";
+            sb.AppendLine(line);
+            sb.AppendLine($"File       | % score | # killed | # timeout | # survived | # no cov | # error |");
+            sb.AppendLine(line);
+            var score = sr.MutationScore.ToString().PadLeft(7);
+            var killed = sr.Killed.ToString().PadLeft(8);
+            var timeout = sr.TimedOut.ToString().PadLeft(9);
+            var survived = sr.Survived.ToString().PadLeft(10);
+            var no_Cov = sr.NoCoverage.ToString().PadLeft(8);
+            var error = 0.ToString().PadLeft(7);
+            sb.AppendLine($"All files  | {score} | {killed} | {timeout} | {survived} | {no_Cov} | {error} |");
+            sb.AppendLine(line);
+
+            // write to output (console)
+            Console.WriteLine(sb.ToString());
         }
 
         public void OnWrapUp()
