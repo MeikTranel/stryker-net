@@ -46,7 +46,7 @@ namespace Stryker.NET
             // create test environments
             for (int i = 0; i < 4; i++)
             {
-                _environments[i] = new TestEnvironment(_directoryManager, _reporter, _rootdir, _tempDir, "environment" + i);
+                _environments[i] = new TestEnvironment(_directoryManager, _reporter, _rootdir, _tempDir ,"environment" + i);
                 _environments[i].PrepareEnvironment();
             }
 
