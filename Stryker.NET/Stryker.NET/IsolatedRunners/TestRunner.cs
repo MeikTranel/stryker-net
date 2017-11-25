@@ -27,12 +27,12 @@ namespace Stryker.NET.IsolatedRunner
             {
                 UseShellExecute = false,
                 WorkingDirectory = _testDir,
-                //RedirectStandardOutput = true,
-                //RedirectStandardError = true
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
             };
             var process = Process.Start(info);
-            //process.BeginOutputReadLine();
-            //process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
             process.WaitForExit();
         }
     }
