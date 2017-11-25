@@ -37,6 +37,7 @@ namespace Stryker.NET.Managers
         {
             if (Directory.Exists(directoryPath))
             {
+                File.SetAttributes(directoryPath, FileAttributes.Normal);
                 Directory.Delete(directoryPath, true);
             }
         }

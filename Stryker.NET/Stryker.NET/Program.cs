@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Stryker.NET.IsolatedRunner;
+using Microsoft.Extensions.Configuration;
 using Stryker.NET.Managers;
 using Stryker.NET.Reporters;
 
@@ -10,8 +11,7 @@ namespace Stryker.NET
     {
         static void Main(string[] args)
         {
-            //TODO: get from args or a appconfig
-            var rootFolder = @".."; 
+            var rootFolder = Directory.GetCurrentDirectory(); 
             var runner = new TestRunner(rootFolder);
             var directoryManager = new DirectoryManager();
             var reporter = new CleartTextReporter(rootFolder);

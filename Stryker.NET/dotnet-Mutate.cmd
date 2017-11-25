@@ -1,0 +1,1 @@
+dotnet C:\Repos\stryker-net-new\stryker-net\Stryker.NET\Stryker.NET\bin\Debug\netcoreapp2.0\Stryker.NET.dll
