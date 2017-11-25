@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Stryker.NET.Reporters
 {
-    interface IReporter : IDisposable
+    public interface IReporter : IDisposable
     {
         void Report(Mutant mutant);
     }

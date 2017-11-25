@@ -5,7 +5,7 @@ namespace Stryker.NET.IsolatedRunner
 {
     public class TestRunner : ITestRunner
     {
-        private readonly string _rootDirectory;        
+        private readonly string _rootDirectory;
         private readonly string _tempDirectory;
         private readonly string _command;
 

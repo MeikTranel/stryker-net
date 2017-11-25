@@ -15,10 +15,9 @@ namespace Stryker.NET
             var runner = new TestRunner(rootFolder);
             var directoryManager = new DirectoryManager();
             var reporter = new CleartTextReporter();
-            using (var stryker = new Stryker(runner, directoryManager, reporter, rootFolder))
+            using (var stryker = new Stryker(directoryManager, reporter, rootFolder))
             {
-                stryker.PrepareEnvironment();
-                stryker.RunMutationTest();
+                stryker.RunMutationTests();
             }              
             
             Console.ReadKey();
