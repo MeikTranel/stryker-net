@@ -5,6 +5,7 @@ using Stryker.NET.Managers;
 using System.Text;
 using Stryker.NET.Reporters;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Stryker.NET
 {
@@ -43,6 +44,9 @@ namespace Stryker.NET
             var mutatorOrchestrator = new MutatorOrchestrator();
             var mutants = mutatorOrchestrator.Mutate(_files);
 
+#if DEBUG
+            mutants = mutants.Take(8);
+#endif
             // create test environments
             for (int i = 0; i < 4; i++)
             {
